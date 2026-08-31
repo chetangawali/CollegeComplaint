@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>College Complaint Management System</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f7fb;
+            color: #1f2937;
+        }
+
+        /* =========================
+           NAVBAR
+        ========================= */
+
+        nav {
+            background: #1f4e79;
+            padding: 18px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: white;
+            font-size: 23px;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 16px;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #cfe7ff;
+        }
+
+        .register-nav {
+            background: white;
+            color: #1f4e79 !important;
+            padding: 10px 18px;
+            border-radius: 7px;
+        }
+
+        .register-nav:hover {
+            background: #eaf3fb;
+        }
+
+
+        /* =========================
+           HERO SECTION
+        ========================= */
+
+        .hero {
+            min-height: 520px;
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(31, 78, 121, 0.97),
+                    rgba(39, 104, 160, 0.90)
+                );
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 70px 20px;
+        }
+
+        .hero-content {
+            max-width: 850px;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.15);
+            color: white;
+            padding: 9px 18px;
+            border-radius: 30px;
+            margin-bottom: 22px;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .hero h1 {
+            color: white;
+            font-size: 52px;
+            line-height: 1.15;
+            margin-bottom: 22px;
+        }
+
+        .hero p {
+            color: #e8f2fb;
+            font-size: 19px;
+            line-height: 1.7;
+            max-width: 720px;
+            margin: auto;
+        }
+
+        .hero-buttons {
+            margin-top: 35px;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 14px 28px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 16px;
+            transition: 0.3s;
+        }
+
+        .btn-primary {
+            background: white;
+            color: #1f4e79;
+        }
+
+        .btn-primary:hover {
+            background: #eaf3fb;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            border: 2px solid white;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: white;
+            color: #1f4e79;
+            transform: translateY(-2px);
+        }
+
+
+        /* =========================
+           FEATURES
+        ========================= */
+
+        .features-section {
+            padding: 75px 8%;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 45px;
+        }
+
+        .section-title h2 {
+            font-size: 34px;
+            color: #1f4e79;
+            margin-bottom: 12px;
+        }
+
+        .section-title p {
+            color: #6b7280;
+            font-size: 17px;
+        }
+
+        .features {
+            max-width: 1150px;
+            margin: auto;
+
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 35px 28px;
+            border-radius: 15px;
+            box-shadow: 0 6px 25px rgba(0,0,0,0.07);
+            text-align: center;
+
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-7px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+        }
+
+        .feature-icon {
+            width: 70px;
+            height: 70px;
+
+            margin: 0 auto 22px;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            background: #eaf3fb;
+            border-radius: 50%;
+
+            font-size: 32px;
+        }
+
+        .feature-card h3 {
+            color: #1f4e79;
+            font-size: 21px;
+            margin-bottom: 13px;
+        }
+
+        .feature-card p {
+            color: #6b7280;
+            line-height: 1.7;
+        }
+
+
+        /* =========================
+           HOW IT WORKS
+        ========================= */
+
+        .how-section {
+            background: white;
+            padding: 75px 8%;
+        }
+
+        .steps {
+            max-width: 1000px;
+            margin: auto;
+
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .step {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .step-number {
+            width: 50px;
+            height: 50px;
+
+            background: #1f4e79;
+            color: white;
+
+            border-radius: 50%;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            margin: 0 auto 18px;
+
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .step h3 {
+            margin-bottom: 10px;
+            color: #1f2937;
+        }
+
+        .step p {
+            color: #6b7280;
+            line-height: 1.6;
+        }
+
+
+        /* =========================
+           CTA
+        ========================= */
+
+        .cta {
+            margin: 75px 8%;
+            background: #1f4e79;
+            border-radius: 18px;
+
+            padding: 55px 25px;
+
+            text-align: center;
+        }
+
+        .cta h2 {
+            color: white;
+            font-size: 32px;
+            margin-bottom: 12px;
+        }
+
+        .cta p {
+            color: #dbeafe;
+            margin-bottom: 27px;
+            font-size: 17px;
+        }
+
+        .cta a {
+            background: white;
+            color: #1f4e79;
+
+            padding: 13px 26px;
+
+            border-radius: 8px;
+
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        footer {
+            background: #172f47;
+            color: #dbeafe;
+
+            text-align: center;
+
+            padding: 25px 15px;
+        }
+
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 850px) {
+
+            nav {
+                flex-direction: column;
+                gap: 18px;
+            }
+
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 18px;
+            }
+
+            .hero h1 {
+                font-size: 38px;
+            }
+
+            .features,
+            .steps {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 500px) {
+
+            .hero {
+                min-height: 480px;
+            }
+
+            .hero h1 {
+                font-size: 31px;
+            }
+
+            .hero p {
+                font-size: 16px;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+
+<!-- =========================
+     NAVBAR
+========================= -->
+
+<nav>
+
+    <div class="logo">
+        College Complaint System
+    </div>
+
+    <div class="nav-links">
+
+        <a href="{{ url_for('index') }}">
+            Home
+        </a>
+
+        <a href="{{ url_for('login') }}">
+            Login
+        </a>
+
+        <a
+            href="{{ url_for('register') }}"
+            class="register-nav"
+        >
+            Register
+        </a>
+
+    </div>
+
+</nav>
+
+
+
+<!-- =========================
+     HERO
+========================= -->
+
+<section class="hero">
+
+    <div class="hero-content">
+
+        <span class="hero-badge">
+            Student Complaint Management Portal
+        </span>
+
+        <h1>
+            Your Voice Matters.
+            <br>
+            We Make It Heard.
+        </h1>
+
+        <p>
+            A simple and transparent platform for students
+            to submit college complaints, track their status,
+            and receive responses directly from the administration.
+        </p>
+
+        <div class="hero-buttons">
+
+            <a
+                href="{{ url_for('login') }}"
+                class="btn btn-primary"
+            >
+                Login to Your Account
+            </a>
+
+            <a
+                href="{{ url_for('register') }}"
+                class="btn btn-secondary"
+            >
+                Create New Account
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================
+     FEATURES
+========================= -->
+
+<section class="features-section">
+
+    <div class="section-title">
+
+        <h2>
+            Everything You Need
+        </h2>
+
+        <p>
+            An easier way to communicate issues with your college administration.
+        </p>
+
+    </div>
+
+
+    <div class="features">
+
+
+        <div class="feature-card">
+
+            <div class="feature-icon">
+                📝
+            </div>
+
+            <h3>
+                Submit Complaints
+            </h3>
+
+            <p>
+                Submit academic, infrastructure,
+                hostel, library and other college-related
+                complaints through a simple online form.
+            </p>
+
+        </div>
+
+
+        <div class="feature-card">
+
+            <div class="feature-icon">
+                📊
+            </div>
+
+            <h3>
+                Track Status
+            </h3>
+
+            <p>
+                View all your submitted complaints
+                and track whether they are pending,
+                in progress or resolved.
+            </p>
+
+        </div>
+
+
+        <div class="feature-card">
+
+            <div class="feature-icon">
+                💬
+            </div>
+
+            <h3>
+                Admin Response
+            </h3>
+
+            <p>
+                Receive official responses and updates
+                directly from the college administration
+                through your dashboard.
+            </p>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================
+     HOW IT WORKS
+========================= -->
+
+<section class="how-section">
+
+    <div class="section-title">
+
+        <h2>
+            How It Works
+        </h2>
+
+        <p>
+            Raise your concern in just three simple steps.
+        </p>
+
+    </div>
+
+
+    <div class="steps">
+
+
+        <div class="step">
+
+            <div class="step-number">
+                1
+            </div>
+
+            <h3>
+                Create an Account
+            </h3>
+
+            <p>
+                Register using your basic student information.
+            </p>
+
+        </div>
+
+
+        <div class="step">
+
+            <div class="step-number">
+                2
+            </div>
+
+            <h3>
+                Submit Complaint
+            </h3>
+
+            <p>
+                Select a category and explain the issue you are facing.
+            </p>
+
+        </div>
+
+
+        <div class="step">
+
+            <div class="step-number">
+                3
+            </div>
+
+            <h3>
+                Track & Resolve
+            </h3>
+
+            <p>
+                Track your complaint and receive updates from the administrator.
+            </p>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================
+     CTA
+========================= -->
+
+<section class="cta">
+
+    <h2>
+        Have a College Issue?
+    </h2>
+
+    <p>
+        Create an account and submit your complaint today.
+    </p>
+
+    <a href="{{ url_for('register') }}">
+        Get Started
+    </a>
+
+</section>
+
+
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<footer>
+
+    © 2026 College Complaint Management System
+
+</footer>
+
+
+</body>
+</html>

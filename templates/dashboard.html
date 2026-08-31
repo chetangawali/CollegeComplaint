@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Student Dashboard - College Complaint System</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f4f7fb;
+            color: #1f2937;
+            min-height: 100vh;
+        }
+
+        /* =========================
+           NAVBAR
+        ========================= */
+
+        nav {
+            background: #1f4e79;
+            min-height: 70px;
+            padding: 0 7%;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            box-shadow: 0 3px 14px rgba(0,0,0,0.12);
+        }
+
+        .logo {
+            color: white;
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 28px;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: bold;
+            padding: 10px 0;
+        }
+
+        .nav-links a:hover {
+            color: #dbeafe;
+        }
+
+        .nav-links .active {
+            border-bottom: 2px solid white;
+        }
+
+        .logout {
+            background: rgba(255,255,255,0.12);
+            padding: 10px 16px !important;
+            border-radius: 7px;
+        }
+
+
+        /* =========================
+           MAIN DASHBOARD
+        ========================= */
+
+        .dashboard {
+            width: min(92%, 1180px);
+            margin: 40px auto 70px;
+        }
+
+
+        /* =========================
+           WELCOME SECTION
+        ========================= */
+
+        .dashboard-header {
+            background: white;
+
+            border: 1px solid #e5e7eb;
+            border-radius: 15px;
+
+            padding: 32px 34px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 25px;
+
+            box-shadow: 0 7px 25px rgba(0,0,0,0.06);
+
+            margin-bottom: 30px;
+        }
+
+        .dashboard-header h1 {
+            color: #1f4e79;
+            font-size: 32px;
+            margin-bottom: 8px;
+        }
+
+        .dashboard-header p {
+            color: #6b7280;
+            font-size: 16px;
+        }
+
+
+        /* =========================
+           BUTTON
+        ========================= */
+
+        .btn {
+            display: inline-block;
+
+            background: #1f4e79;
+            color: white;
+
+            text-decoration: none;
+
+            padding: 13px 21px;
+
+            border-radius: 8px;
+
+            font-weight: bold;
+
+            white-space: nowrap;
+
+            transition: 0.2s;
+        }
+
+        .btn:hover {
+            background: #163b5c;
+            transform: translateY(-1px);
+        }
+
+
+        /* =========================
+           FLASH MESSAGE
+        ========================= */
+
+        .message {
+            background: #e9f8ef;
+            color: #176b3a;
+
+            border: 1px solid #bfe4cb;
+            border-left: 4px solid #2e8b57;
+
+            padding: 14px 17px;
+
+            border-radius: 8px;
+
+            margin-bottom: 25px;
+
+            font-weight: bold;
+        }
+
+
+        /* =========================
+           SECTION
+        ========================= */
+
+        .complaints-section > h2 {
+            color: #1f4e79;
+            font-size: 25px;
+
+            margin-bottom: 18px;
+        }
+
+
+        /* =========================
+           COMPLAINT CARD
+        ========================= */
+
+        .complaint-card {
+            background: white;
+
+            border: 1px solid #e5e7eb;
+            border-radius: 14px;
+
+            padding: 28px 30px;
+
+            margin-bottom: 22px;
+
+            box-shadow: 0 6px 22px rgba(0,0,0,0.06);
+        }
+
+
+        /* =========================
+           COMPLAINT HEADER
+        ========================= */
+
+        .complaint-header {
+            display: flex;
+
+            align-items: flex-start;
+            justify-content: space-between;
+
+            gap: 20px;
+
+            padding-bottom: 19px;
+
+            border-bottom: 1px solid #edf0f3;
+
+            margin-bottom: 20px;
+        }
+
+        .complaint-header h3 {
+            color: #1f4e79;
+            font-size: 18px;
+        }
+
+
+        /* =========================
+           STATUS
+        ========================= */
+
+        .status {
+            display: inline-block;
+
+            padding: 7px 13px;
+
+            border-radius: 20px;
+
+            background: #e6f1fb;
+            color: #1f5f91;
+
+            font-size: 13px;
+            font-weight: bold;
+
+            white-space: nowrap;
+        }
+
+
+        /* =========================
+           SUBJECT
+        ========================= */
+
+        .complaint-subject {
+            font-size: 21px;
+
+            color: #1f2937;
+
+            margin-bottom: 19px;
+        }
+
+
+        /* =========================
+           DETAILS
+        ========================= */
+
+        .details-grid {
+            display: grid;
+
+            grid-template-columns: 1fr 1fr;
+
+            gap: 14px;
+
+            margin-bottom: 20px;
+        }
+
+        .detail-box {
+            background: #f8fafc;
+
+            border-radius: 9px;
+
+            padding: 14px 16px;
+        }
+
+        .detail-label {
+            display: block;
+
+            color: #6b7280;
+
+            font-size: 12px;
+
+            font-weight: bold;
+
+            text-transform: uppercase;
+
+            margin-bottom: 5px;
+        }
+
+        .detail-value {
+            color: #374151;
+
+            font-weight: bold;
+        }
+
+
+        /* =========================
+           DESCRIPTION
+        ========================= */
+
+        .description-box {
+            background: #f8fafc;
+
+            border-radius: 9px;
+
+            padding: 17px;
+
+            margin-bottom: 20px;
+        }
+
+        .description-box strong {
+            display: block;
+
+            color: #374151;
+
+            margin-bottom: 7px;
+        }
+
+        .description-box p {
+            color: #4b5563;
+
+            line-height: 1.6;
+        }
+
+
+        /* =========================
+           ADMIN REPLY
+        ========================= */
+
+        .admin-reply {
+            background: #eef8f0;
+
+            border-left: 4px solid #4b9b57;
+
+            border-radius: 8px;
+
+            padding: 17px 18px;
+
+            margin-top: 18px;
+        }
+
+        .admin-reply strong {
+            color: #26733b;
+
+            display: block;
+
+            margin-bottom: 7px;
+        }
+
+        .admin-reply p {
+            color: #374151;
+
+            line-height: 1.6;
+        }
+
+
+        /* =========================
+           WAITING FOR REPLY
+        ========================= */
+
+        .no-reply {
+            background: #fff8e8;
+
+            border-left: 4px solid #e1a82f;
+
+            border-radius: 8px;
+
+            padding: 15px 18px;
+
+            margin-top: 18px;
+
+            color: #765a18;
+        }
+
+        .no-reply strong {
+            margin-right: 5px;
+        }
+
+
+        /* =========================
+           SUBMITTED DATE
+        ========================= */
+
+        .submitted {
+            color: #7b8490;
+
+            font-size: 13px;
+
+            margin-top: 19px;
+
+            padding-top: 15px;
+
+            border-top: 1px solid #edf0f3;
+        }
+
+
+        /* =========================
+           EMPTY STATE
+        ========================= */
+
+        .empty {
+            background: white;
+
+            border: 1px solid #e5e7eb;
+
+            border-radius: 14px;
+
+            text-align: center;
+
+            padding: 60px 25px;
+
+            box-shadow: 0 6px 22px rgba(0,0,0,0.05);
+        }
+
+        .empty-icon {
+            font-size: 42px;
+
+            margin-bottom: 14px;
+        }
+
+        .empty h3 {
+            color: #1f2937;
+
+            font-size: 22px;
+
+            margin-bottom: 8px;
+        }
+
+        .empty p {
+            color: #6b7280;
+
+            margin-bottom: 24px;
+        }
+
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 700px) {
+
+            nav {
+                padding: 18px 5%;
+
+                flex-direction: column;
+
+                gap: 14px;
+            }
+
+            .nav-links {
+                gap: 18px;
+
+                flex-wrap: wrap;
+
+                justify-content: center;
+            }
+
+            .dashboard {
+                width: 92%;
+
+                margin-top: 25px;
+            }
+
+            .dashboard-header {
+                padding: 25px;
+
+                flex-direction: column;
+
+                align-items: flex-start;
+            }
+
+            .dashboard-header h1 {
+                font-size: 27px;
+            }
+
+            .complaint-card {
+                padding: 22px;
+            }
+
+            .complaint-header {
+                flex-direction: column;
+
+                align-items: flex-start;
+            }
+
+            .details-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================
+     NAVIGATION
+========================= -->
+
+<nav>
+
+    <div class="logo">
+        College Complaint System
+    </div>
+
+
+    <div class="nav-links">
+
+        <a
+            href="{{ url_for('dashboard') }}"
+            class="active"
+        >
+            Dashboard
+        </a>
+
+
+        <a href="{{ url_for('submit_complaint') }}">
+            Submit Complaint
+        </a>
+
+
+        <a
+            href="{{ url_for('logout') }}"
+            class="logout"
+        >
+            Logout
+        </a>
+
+    </div>
+
+</nav>
+
+
+
+<!-- =========================
+     DASHBOARD
+========================= -->
+
+<div class="dashboard">
+
+
+    <!-- WELCOME -->
+
+    <div class="dashboard-header">
+
+        <div>
+
+            <h1>
+                Welcome, {{ user_name }}
+            </h1>
+
+            <p>
+                Manage and track your college complaints in one place.
+            </p>
+
+        </div>
+
+
+        <a
+            href="{{ url_for('submit_complaint') }}"
+            class="btn"
+        >
+            + New Complaint
+        </a>
+
+    </div>
+
+
+
+    <!-- FLASH MESSAGE -->
+
+    {% with messages = get_flashed_messages() %}
+
+        {% if messages %}
+
+            {% for message in messages %}
+
+                <div class="message">
+
+                    ✓ {{ message }}
+
+                </div>
+
+            {% endfor %}
+
+        {% endif %}
+
+    {% endwith %}
+
+
+
+    <!-- COMPLAINTS -->
+
+    <div class="complaints-section">
+
+
+        <h2>
+            My Complaints
+        </h2>
+
+
+
+        {% if complaints %}
+
+
+            {% for complaint in complaints %}
+
+
+            <div class="complaint-card">
+
+
+                <!-- HEADER -->
+
+                <div class="complaint-header">
+
+
+                    <h3>
+                        Complaint #{{ complaint.id }}
+                    </h3>
+
+
+                    <span class="status">
+
+                        {{ complaint.status }}
+
+                    </span>
+
+
+                </div>
+
+
+
+                <!-- SUBJECT -->
+
+                <h3 class="complaint-subject">
+
+                    {{ complaint.subject }}
+
+                </h3>
+
+
+
+                <!-- DETAILS -->
+
+                <div class="details-grid">
+
+
+                    <div class="detail-box">
+
+                        <span class="detail-label">
+                            Category
+                        </span>
+
+                        <span class="detail-value">
+
+                            {{ complaint.category_name }}
+
+                        </span>
+
+                    </div>
+
+
+
+                    <div class="detail-box">
+
+                        <span class="detail-label">
+                            Priority
+                        </span>
+
+                        <span class="detail-value">
+
+                            {{ complaint.priority }}
+
+                        </span>
+
+                    </div>
+
+
+                </div>
+
+
+
+                <!-- DESCRIPTION -->
+
+                <div class="description-box">
+
+                    <strong>
+                        Complaint Description
+                    </strong>
+
+                    <p>
+                        {{ complaint.description }}
+                    </p>
+
+                </div>
+
+
+
+                <!-- ADMIN RESPONSE -->
+
+                {% if complaint.admin_reply %}
+
+
+                    <div class="admin-reply">
+
+                        <strong>
+                            Admin Response
+                        </strong>
+
+                        <p>
+                            {{ complaint.admin_reply }}
+                        </p>
+
+                    </div>
+
+
+                {% else %}
+
+
+                    <div class="no-reply">
+
+                        <strong>
+                            Admin Response:
+                        </strong>
+
+                        Waiting for administrator response.
+
+                    </div>
+
+
+                {% endif %}
+
+
+
+                <!-- DATE -->
+
+                <p class="submitted">
+
+                    <strong>
+                        Submitted:
+                    </strong>
+
+                    {{ complaint.created_at }}
+
+                </p>
+
+
+            </div>
+
+
+            {% endfor %}
+
+
+
+        {% else %}
+
+
+            <!-- NO COMPLAINTS -->
+
+            <div class="empty">
+
+
+                <div class="empty-icon">
+                    📋
+                </div>
+
+
+                <h3>
+                    No Complaints Yet
+                </h3>
+
+
+                <p>
+                    You haven't submitted any complaints yet.
+                </p>
+
+
+                <a
+                    href="{{ url_for('submit_complaint') }}"
+                    class="btn"
+                >
+                    Submit Your First Complaint
+                </a>
+
+
+            </div>
+
+
+        {% endif %}
+
+
+    </div>
+
+
+</div>
+
+
+</body>
+
+</html>

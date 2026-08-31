@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Submit Complaint - College Complaint System</title>
+
+<style>
+    * { box-sizing: border-box; }
+
+    body {
+        font-family: Arial, sans-serif;
+        background: #f4f7fb;
+        margin: 0;
+        min-height: 100vh;
+        color: #1f2937;
+    }
+
+    nav {
+        background: #1f4e79;
+        padding: 18px 7%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        box-shadow: 0 3px 12px rgba(0,0,0,0.12);
+    }
+
+    nav::before {
+        content: "College Complaint System";
+        color: white;
+        font-size: 21px;
+        font-weight: bold;
+    }
+
+    .nav-links {
+        display: flex;
+        gap: 28px;
+    }
+
+    nav a {
+        color: white;
+        text-decoration: none;
+        font-weight: bold;
+    }
+
+    nav a:hover {
+        color: #dbeafe;
+    }
+
+    .page {
+        width: min(92%, 850px);
+        margin: 42px auto 70px;
+    }
+
+    .container {
+        width: 100%;
+        background: white;
+        padding: 42px 48px;
+        border-radius: 14px;
+        box-shadow: 0 8px 28px rgba(0,0,0,0.07);
+        border: 1px solid #e5e7eb;
+    }
+
+    h1 {
+        text-align: center;
+        color: #1f4e79;
+        margin: 0 0 10px;
+        font-size: 32px;
+    }
+
+    .subtitle {
+        text-align: center;
+        color: #6b7280;
+        margin-bottom: 34px;
+        font-size: 16px;
+    }
+
+    label {
+        display: block;
+        margin-top: 22px;
+        font-weight: bold;
+        color: #374151;
+    }
+
+    input, select, textarea {
+        width: 100%;
+        padding: 14px;
+        margin-top: 8px;
+        border: 1px solid #d1d5db;
+        border-radius: 9px;
+        box-sizing: border-box;
+        font-size: 15px;
+        background: #fff;
+    }
+
+    input:focus, select:focus, textarea:focus {
+        outline: none;
+        border-color: #1f4e79;
+        box-shadow: 0 0 0 3px rgba(31,78,121,0.12);
+    }
+
+    textarea {
+        min-height: 160px;
+        resize: vertical;
+    }
+
+    button {
+        width: 100%;
+        padding: 14px;
+        margin-top: 32px;
+        background: #1f4e79;
+        color: white;
+        border: none;
+        border-radius: 9px;
+        font-size: 17px;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background: #163b5c;
+    }
+
+    .form-note {
+        margin-top: 25px;
+        padding: 14px 16px;
+        background: #f0f6fb;
+        border-left: 4px solid #1f4e79;
+        border-radius: 7px;
+        color: #5b6775;
+        font-size: 14px;
+        line-height: 1.5;
+    }
+
+    @media (max-width: 650px) {
+        nav {
+            padding: 18px 5%;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .nav-links {
+            gap: 18px;
+        }
+
+        .page {
+            width: 92%;
+            margin-top: 25px;
+        }
+
+        .container {
+            padding: 30px 24px;
+        }
+
+        h1 {
+            font-size: 27px;
+        }
+    }
+</style>
+
+</head>
+
+<body>
+
+<nav>
+    <a href="{{ url_for('dashboard') }}">Dashboard</a>
+    <a href="{{ url_for('submit_complaint') }}">Submit Complaint</a>
+    <a href="{{ url_for('logout') }}">Logout</a>
+</nav>
+
+<main class="page">
+
+<div class="container">
+
+<h1>Submit a Complaint</h1>
+<p class="subtitle">Tell us about your issue and we'll help get it resolved.</p>
+
+<form method="POST">
+
+    <label for="category_id">Complaint Category</label>
+
+    <select name="category_id" id="category_id" required>
+        <option value="">-- Select Category --</option>
+
+        {% for category in categories %}
+            <option value="{{ category.id }}">
+                {{ category.name }}
+            </option>
+        {% endfor %}
+
+    </select>
+
+
+    <label for="subject">Complaint Subject</label>
+
+    <input
+        type="text"
+        name="subject"
+        id="subject"
+        placeholder="Enter complaint subject"
+        required
+    >
+
+
+    <label for="description">Complaint Description</label>
+
+    <textarea
+        name="description"
+        id="description"
+        placeholder="Describe your complaint..."
+        required
+    ></textarea>
+
+
+    <label for="priority">Priority</label>
+
+    <select name="priority" id="priority" required>
+        <option value="">-- Select Priority --</option>
+        <option value="Low">Low</option>
+        <option value="Medium">Medium</option>
+        <option value="High">High</option>
+    </select>
+
+
+    <button type="submit">Submit Complaint</button>
+
+</form>
+
+<div class="form-note">
+    Please provide accurate details so the concerned college department can review and resolve your complaint efficiently.
+</div>
+
+
+</div>
+
+</main>
+
+</body>
+</html>
