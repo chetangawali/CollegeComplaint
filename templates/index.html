@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>College Complaint Management System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 
     <style>
         * {
@@ -15,8 +16,16 @@
 
         body {
             font-family: Arial, sans-serif;
-            background: #f5f7fb;
-            color: #1f2937;
+            background:
+                linear-gradient(rgba(17, 17, 17, 0.08) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(17, 17, 17, 0.08) 1px, transparent 1px),
+                radial-gradient(circle at 8% 14%, rgba(255, 76, 201, 0.48), transparent 24%),
+                radial-gradient(circle at 92% 22%, rgba(184, 255, 75, 0.5), transparent 26%),
+                radial-gradient(circle at 78% 84%, rgba(255, 139, 61, 0.4), transparent 25%),
+                linear-gradient(135deg, #fff4fb 0%, #e9fff5 48%, #fff5cf 100%);
+            background-size: 32px 32px, 32px 32px, auto, auto, auto, auto;
+            background-attachment: fixed;
+            color: #203047;
         }
 
         /* =========================
@@ -24,46 +33,93 @@
         ========================= */
 
         nav {
-            background: #1f4e79;
-            padding: 18px 8%;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            background: #171717;
+            border-bottom: 3px solid #111111;
+            padding: 14px 8%;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            box-shadow: 0 7px 0 #ff4fc3;
         }
 
         .logo {
+            display: flex;
+            align-items: center;
+            gap: 11px;
             color: white;
-            font-size: 23px;
+            font-size: 21px;
             font-weight: bold;
+            letter-spacing: 0.2px;
+        }
+
+        .logo::before {
+            content: "";
+            width: 12px;
+            height: 12px;
+            flex: 0 0 auto;
+            background: #b9ff4a;
+            border: 2px solid #111111;
+            border-radius: 4px;
+            box-shadow: 3px 3px 0 #ff4fc3;
+            transform: rotate(45deg);
         }
 
         .nav-links {
             display: flex;
-            gap: 30px;
+            gap: 10px;
             align-items: center;
         }
 
         .nav-links a {
+            position: relative;
             color: white;
             text-decoration: none;
             font-weight: bold;
             font-size: 16px;
-            transition: 0.3s;
+            padding: 10px 14px;
+            border-radius: 8px;
+            transition: color 0.25s, background 0.25s, transform 0.25s;
         }
 
         .nav-links a:hover {
-            color: #cfe7ff;
+            color: #b9ff4a;
+            background: #292929;
+            transform: translateY(-2px);
+        }
+
+        .nav-links a:not(.register-nav)::after {
+            content: "";
+            position: absolute;
+            left: 14px;
+            right: 14px;
+            bottom: 5px;
+            height: 2px;
+            background: #ff4fc3;
+            border-radius: 999px;
+            transform: scaleX(0);
+            transform-origin: center;
+            transition: transform 0.25s;
+        }
+
+        .nav-links a:not(.register-nav):hover::after {
+            transform: scaleX(1);
         }
 
         .register-nav {
-            background: white;
-            color: #1f4e79 !important;
-            padding: 10px 18px;
-            border-radius: 7px;
+            background: #b9ff4a;
+            color: #111111 !important;
+            padding: 11px 18px !important;
+            border: 2px solid #111111;
+            box-shadow: 4px 4px 0 #ff4fc3;
         }
 
         .register-nav:hover {
-            background: #eaf3fb;
+            background: #ff4fc3 !important;
+            box-shadow: 2px 2px 0 #b9ff4a;
+            transform: translateY(2px) !important;
         }
 
 
@@ -73,33 +129,72 @@
 
         .hero {
             min-height: 520px;
-            background:
-                linear-gradient(
-                    135deg,
-                    rgba(31, 78, 121, 0.97),
-                    rgba(39, 104, 160, 0.90)
-                );
+            background: linear-gradient(125deg, #5d16d9 0%, #ff4fc3 52%, #ff8b3d 100%);
+            border-bottom: 4px solid #111111;
 
             display: flex;
             justify-content: center;
             align-items: center;
             text-align: center;
             padding: 70px 20px;
+            position: relative;
+            overflow: hidden;
+            isolation: isolate;
+        }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            width: 18rem;
+            aspect-ratio: 1;
+            left: var(--ripple-x, 50%);
+            top: var(--ripple-y, 50%);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            box-shadow: 0 0 0 12px rgba(255, 255, 255, 0.12),
+                0 0 0 28px rgba(255, 255, 255, 0.07),
+                0 0 45px rgba(255, 255, 255, 0.16);
+            opacity: 0;
+            pointer-events: none;
+            transform: translate(-50%, -50%) scale(0.15);
+            z-index: -1;
+        }
+
+        .hero.is-rippling::before {
+            animation: hero-ripple 1.2s ease-out;
+        }
+
+        @keyframes hero-ripple {
+            0% {
+                opacity: 0.85;
+                transform: translate(-50%, -50%) scale(0.15);
+            }
+
+            100% {
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(4.5);
+            }
         }
 
         .hero-content {
             max-width: 850px;
+            position: relative;
+            z-index: 1;
         }
 
         .hero-badge {
             display: inline-block;
-            background: rgba(255,255,255,0.15);
-            color: white;
+            background: #b9ff4a;
+            color: #111111;
             padding: 9px 18px;
-            border-radius: 30px;
+            border-radius: 4px;
             margin-bottom: 22px;
             font-size: 14px;
             font-weight: bold;
+            border: 2px solid #111111;
+            box-shadow: 5px 5px 0 #111111;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
         }
 
         .hero h1 {
@@ -107,6 +202,7 @@
             font-size: 52px;
             line-height: 1.15;
             margin-bottom: 22px;
+            text-shadow: 5px 5px 0 #111111;
         }
 
         .hero p {
@@ -128,7 +224,9 @@
         .btn {
             display: inline-block;
             padding: 14px 28px;
-            border-radius: 8px;
+            border-radius: 4px;
+            border: 2px solid #111111;
+            box-shadow: 5px 5px 0 #111111;
             text-decoration: none;
             font-weight: bold;
             font-size: 16px;
@@ -136,24 +234,25 @@
         }
 
         .btn-primary {
-            background: white;
-            color: #1f4e79;
+            background: #b9ff4a;
+            color: #111111;
         }
 
         .btn-primary:hover {
-            background: #eaf3fb;
-            transform: translateY(-2px);
+            background: #ffdb4d;
+            transform: translate(-2px, -2px);
         }
 
         .btn-secondary {
-            border: 2px solid white;
-            color: white;
+            background: #fff4fb;
+            border: 2px solid #111111;
+            color: #111111;
         }
 
         .btn-secondary:hover {
-            background: white;
-            color: #1f4e79;
-            transform: translateY(-2px);
+            background: #ffdb4d;
+            color: #111111;
+            transform: translate(-2px, -2px);
         }
 
 
@@ -163,6 +262,14 @@
 
         .features-section {
             padding: 75px 8%;
+            position: relative;
+            overflow: hidden;
+            background: rgba(255, 255, 255, 0.58);
+            border-top: 4px solid #111111;
+            border-bottom: 4px solid #111111;
+            box-shadow: inset 0 7px 0 #b9ff4a, inset 0 -12px 0 #ff4fc3;
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
         }
 
         .section-title {
@@ -172,12 +279,12 @@
 
         .section-title h2 {
             font-size: 34px;
-            color: #1f4e79;
+            color: #111111;
             margin-bottom: 12px;
         }
 
         .section-title p {
-            color: #6b7280;
+            color: #3d3d3d;
             font-size: 17px;
         }
 
@@ -191,18 +298,21 @@
         }
 
         .feature-card {
-            background: white;
+            background: linear-gradient(145deg, #fff4fb, #dffff1);
             padding: 35px 28px;
-            border-radius: 15px;
-            box-shadow: 0 6px 25px rgba(0,0,0,0.07);
+            border: 4px solid #111111;
+            border-radius: 3px;
+            box-shadow: 9px 9px 0 #111111;
             text-align: center;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
 
-            transition: transform 0.3s, box-shadow 0.3s;
+            transition: transform 0.2s, box-shadow 0.2s;
         }
 
         .feature-card:hover {
-            transform: translateY(-7px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+            transform: translate(-3px, -3px);
+            box-shadow: 12px 12px 0 #111111;
         }
 
         .feature-icon {
@@ -215,20 +325,23 @@
             justify-content: center;
             align-items: center;
 
-            background: #eaf3fb;
+            background: #ffdb4d;
+            border: 4px solid #111111;
             border-radius: 50%;
+
+            box-shadow: 4px 4px 0 #111111;
 
             font-size: 32px;
         }
 
         .feature-card h3 {
-            color: #1f4e79;
+            color: #5d16d9;
             font-size: 21px;
             margin-bottom: 13px;
         }
 
         .feature-card p {
-            color: #6b7280;
+            color: #3d3d3d;
             line-height: 1.7;
         }
 
@@ -238,8 +351,12 @@
         ========================= */
 
         .how-section {
-            background: white;
+            background: rgba(255, 255, 255, 0.7);
             padding: 75px 8%;
+            border-top: 4px solid #111111;
+            border-bottom: 4px solid #111111;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
         }
 
         .steps {
@@ -260,10 +377,12 @@
             width: 50px;
             height: 50px;
 
-            background: #1f4e79;
+            background: #ff4fc3;
+            border: 3px solid #111111;
+            box-shadow: 4px 4px 0 #111111;
             color: white;
 
-            border-radius: 50%;
+            border-radius: 8px;
 
             display: flex;
             align-items: center;
@@ -277,11 +396,11 @@
 
         .step h3 {
             margin-bottom: 10px;
-            color: #1f2937;
+            color: #111111;
         }
 
         .step p {
-            color: #6b7280;
+            color: #3d3d3d;
             line-height: 1.6;
         }
 
@@ -292,8 +411,10 @@
 
         .cta {
             margin: 75px 8%;
-            background: #1f4e79;
-            border-radius: 18px;
+            background: #b9ff4a;
+            border: 4px solid #111111;
+            border-radius: 4px;
+            box-shadow: 10px 10px 0 #111111;
 
             padding: 55px 25px;
 
@@ -301,24 +422,26 @@
         }
 
         .cta h2 {
-            color: white;
+            color: #111111;
             font-size: 32px;
             margin-bottom: 12px;
         }
 
         .cta p {
-            color: #dbeafe;
+            color: #111111;
             margin-bottom: 27px;
             font-size: 17px;
         }
 
         .cta a {
-            background: white;
-            color: #1f4e79;
+            background: #ff4fc3;
+            color: #111111;
 
             padding: 13px 26px;
 
-            border-radius: 8px;
+            border: 2px solid #111111;
+            border-radius: 4px;
+            box-shadow: 4px 4px 0 #111111;
 
             text-decoration: none;
             font-weight: bold;
@@ -330,8 +453,9 @@
         ========================= */
 
         footer {
-            background: #172f47;
-            color: #dbeafe;
+            background: #171717;
+            color: #b9ff4a;
+            border-top: 4px solid #ff4fc3;
 
             text-align: center;
 
@@ -386,6 +510,12 @@
 
             .btn {
                 width: 100%;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .hero::before {
+                display: none;
             }
         }
 
@@ -672,6 +802,31 @@
     © 2026 College Complaint Management System
 
 </footer>
+
+<script>
+    const hero = document.querySelector(".hero");
+
+    if (hero && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        hero.addEventListener("pointerenter", (event) => {
+            const bounds = hero.getBoundingClientRect();
+            hero.style.setProperty("--ripple-x", `${event.clientX - bounds.left}px`);
+            hero.style.setProperty("--ripple-y", `${event.clientY - bounds.top}px`);
+            hero.classList.remove("is-rippling");
+            void hero.offsetWidth;
+            hero.classList.add("is-rippling");
+        });
+
+        hero.addEventListener("pointermove", (event) => {
+            const bounds = hero.getBoundingClientRect();
+            hero.style.setProperty("--ripple-x", `${event.clientX - bounds.left}px`);
+            hero.style.setProperty("--ripple-y", `${event.clientY - bounds.top}px`);
+        });
+
+        hero.addEventListener("pointerleave", () => {
+            hero.classList.remove("is-rippling");
+        });
+    }
+</script>
 
 
 </body>

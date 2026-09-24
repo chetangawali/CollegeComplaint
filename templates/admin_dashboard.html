@@ -8,7 +8,6 @@
     <title>Admin Dashboard - College Complaint System</title>
 
     <style>
-
         * {
             margin: 0;
             padding: 0;
@@ -16,8 +15,8 @@
         }
 
         body {
-            font-family: Arial, sans-serif;
-            background: #f4f7fb;
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f5f7fa;
             color: #1f2937;
         }
 
@@ -26,7 +25,7 @@
         ========================= */
 
         nav {
-            height: 70px;
+            height: 68px;
             background: #1f4e79;
             color: white;
 
@@ -34,70 +33,106 @@
             align-items: center;
             justify-content: space-between;
 
-            padding: 0 6%;
-            box-shadow: 0 3px 12px rgba(0,0,0,0.12);
+            padding: 0 5%;
+
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.10);
         }
 
         .logo {
-            font-size: 22px;
-            font-weight: bold;
+            font-size: 20px;
+            font-weight: 700;
+            letter-spacing: 0.2px;
         }
 
-        .nav-links {
+        .nav-right {
             display: flex;
             align-items: center;
-            gap: 28px;
+            gap: 20px;
         }
 
-        .nav-links a {
-            color: white;
-            text-decoration: none;
-            font-weight: bold;
-        }
-
-        .nav-links a:hover {
-            color: #cfe7ff;
+        .admin-name {
+            font-size: 14px;
+            opacity: 0.9;
         }
 
         .logout {
-            background: rgba(255,255,255,0.12);
-            padding: 10px 18px;
-            border-radius: 7px;
+            color: white;
+            text-decoration: none;
+
+            border: 1px solid rgba(255, 255, 255, 0.35);
+            padding: 8px 16px;
+
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 600;
+
+            transition: 0.2s;
+        }
+
+        .logout:hover {
+            background: rgba(255, 255, 255, 0.12);
         }
 
         /* =========================
-           MAIN DASHBOARD
+           MAIN
         ========================= */
 
-        .dashboard {
+        .container {
             width: min(94%, 1250px);
-            margin: 40px auto 70px;
+            margin: 35px auto 60px;
         }
 
-        .dashboard-header {
+        /* =========================
+           HEADER
+        ========================= */
+
+        .page-header {
             display: flex;
             justify-content: space-between;
-            align-items: center;
-            margin-bottom: 30px;
+            align-items: flex-end;
+
+            margin-bottom: 25px;
         }
 
-        .dashboard-header h1 {
-            font-size: 34px;
+        .page-header h1 {
+            font-size: 30px;
             color: #1f2937;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
         }
 
-        .dashboard-header p {
+        .page-header p {
             color: #6b7280;
-            font-size: 16px;
+            font-size: 14px;
         }
 
-        .admin-badge {
-            background: #e8f1f9;
+        .admin-label {
+            background: #eaf2f8;
             color: #1f4e79;
-            padding: 12px 18px;
-            border-radius: 8px;
-            font-weight: bold;
+
+            padding: 9px 14px;
+            border-radius: 6px;
+
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        /* =========================
+           FLASH MESSAGE
+        ========================= */
+
+        .message {
+            background: #ecfdf3;
+            color: #18733c;
+
+            border: 1px solid #b7e4c7;
+
+            padding: 12px 16px;
+            border-radius: 7px;
+
+            margin-bottom: 22px;
+
+            font-size: 14px;
+            font-weight: 600;
         }
 
         /* =========================
@@ -107,119 +142,255 @@
         .stats {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 20px;
-            margin-bottom: 35px;
+
+            gap: 15px;
+            margin-bottom: 28px;
         }
 
         .stat-card {
             background: white;
-            border-radius: 12px;
-            padding: 24px;
 
-            box-shadow: 0 5px 20px rgba(0,0,0,0.06);
+            border: 1px solid #e5e7eb;
+            border-radius: 9px;
 
-            border-left: 5px solid #1f4e79;
-        }
+            padding: 19px 20px;
 
-        .stat-card h3 {
-            color: #6b7280;
-            font-size: 14px;
-            margin-bottom: 10px;
-        }
-
-        .stat-number {
-            font-size: 30px;
-            font-weight: bold;
-            color: #1f2937;
-        }
-
-        /* =========================
-           FLASH MESSAGE
-        ========================= */
-
-        .message {
-            background: #e8f7ee;
-            color: #176b3a;
-            padding: 14px 18px;
-            border-radius: 8px;
-            margin-bottom: 25px;
-            border: 1px solid #bce3cb;
-            font-weight: bold;
-        }
-
-        /* =========================
-           SECTION TITLE
-        ========================= */
-
-        .section-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 20px;
+
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
         }
 
-        .section-header h2 {
-            font-size: 25px;
+        .stat-info h3 {
+            font-size: 12px;
+            color: #6b7280;
+
+            text-transform: uppercase;
+            letter-spacing: 0.4px;
+
+            margin-bottom: 7px;
+        }
+
+        .stat-number {
+            font-size: 27px;
+            font-weight: 700;
+            color: #1f2937;
+        }
+
+        .stat-icon {
+            width: 42px;
+            height: 42px;
+
+            border-radius: 8px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 18px;
+        }
+
+        .total-icon {
+            background: #eaf2f8;
             color: #1f4e79;
         }
 
-        .complaint-count {
-            color: #6b7280;
-            font-size: 14px;
+        .pending-icon {
+            background: #fff7df;
+            color: #9a6b00;
+        }
+
+        .progress-icon {
+            background: #e6f1ff;
+            color: #1769aa;
+        }
+
+        .resolved-icon {
+            background: #e8f7ee;
+            color: #18733c;
         }
 
         /* =========================
-           COMPLAINT CARD
+           TOOLBAR
         ========================= */
 
-        .complaint-card {
+        .toolbar {
             background: white;
-            border-radius: 14px;
-
-            margin-bottom: 25px;
-            padding: 28px;
-
-            box-shadow: 0 6px 25px rgba(0,0,0,0.07);
 
             border: 1px solid #e5e7eb;
-        }
+            border-radius: 9px;
 
-        .complaint-top {
+            padding: 15px;
+
             display: flex;
             justify-content: space-between;
-            align-items: flex-start;
+            align-items: center;
 
-            padding-bottom: 20px;
-            border-bottom: 1px solid #e5e7eb;
-            margin-bottom: 22px;
+            gap: 15px;
+
+            margin-bottom: 15px;
         }
 
-        .complaint-title {
-            font-size: 21px;
+        .section-title h2 {
+            font-size: 19px;
             color: #1f2937;
+            margin-bottom: 4px;
+        }
+
+        .section-title span {
+            font-size: 13px;
+            color: #6b7280;
+        }
+
+        .filters {
+            display: flex;
+            gap: 10px;
+        }
+
+        .search-box,
+        .filter-select {
+            height: 38px;
+
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+
+            padding: 0 12px;
+
+            background: white;
+            color: #374151;
+
+            font-size: 14px;
+        }
+
+        .search-box {
+            width: 240px;
+        }
+
+        .filter-select {
+            width: 150px;
+        }
+
+        .search-box:focus,
+        .filter-select:focus {
+            outline: none;
+            border-color: #1f4e79;
+            box-shadow: 0 0 0 2px rgba(31, 78, 121, 0.08);
+        }
+
+        /* =========================
+           TABLE
+        ========================= */
+
+        .table-container {
+            background: white;
+
+            border: 1px solid #e5e7eb;
+            border-radius: 9px;
+
+            overflow-x: auto;
+
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+
+            min-width: 900px;
+        }
+
+        thead {
+            background: #f8fafc;
+        }
+
+        th {
+            text-align: left;
+
+            padding: 13px 16px;
+
+            font-size: 11px;
+            color: #6b7280;
+
+            text-transform: uppercase;
+            letter-spacing: 0.4px;
+
+            font-weight: 700;
+
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        td {
+            padding: 15px 16px;
+
+            border-bottom: 1px solid #eef0f2;
+
+            font-size: 14px;
+            vertical-align: middle;
+        }
+
+        tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        tbody tr:hover {
+            background: #fafcff;
         }
 
         .complaint-id {
             color: #6b7280;
-            font-size: 14px;
-            margin-bottom: 7px;
+            font-size: 12px;
+            margin-bottom: 4px;
+        }
+
+        .subject {
+            color: #1f2937;
+            font-weight: 700;
+
+            max-width: 230px;
+
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .student-name {
+            font-weight: 600;
+            color: #374151;
+        }
+
+        .student-email {
+            color: #6b7280;
+            font-size: 12px;
+
+            max-width: 190px;
+
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+
+            margin-top: 3px;
+        }
+
+        .category {
+            color: #374151;
         }
 
         /* =========================
            BADGES
         ========================= */
 
-        .badges {
-            display: flex;
-            gap: 8px;
-            flex-wrap: wrap;
-        }
-
         .badge {
-            padding: 7px 12px;
-            border-radius: 20px;
-            font-size: 13px;
-            font-weight: bold;
+            display: inline-block;
+
+            padding: 5px 9px;
+
+            border-radius: 5px;
+
+            font-size: 11px;
+            font-weight: 700;
+
+            white-space: nowrap;
         }
 
         .status-pending {
@@ -258,141 +429,220 @@
         }
 
         /* =========================
-           INFORMATION GRID
+           VIEW BUTTON
         ========================= */
 
-        .complaint-info {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 18px;
+        .view-button {
+            border: 1px solid #1f4e79;
+            background: white;
 
-            margin-bottom: 22px;
-        }
+            color: #1f4e79;
 
-        .info-box {
-            background: #f8fafc;
-            border-radius: 9px;
-            padding: 15px;
-        }
+            padding: 7px 12px;
 
-        .info-label {
-            color: #6b7280;
+            border-radius: 5px;
+
             font-size: 12px;
-            font-weight: bold;
-            text-transform: uppercase;
-            margin-bottom: 6px;
+            font-weight: 700;
+
+            cursor: pointer;
+
+            transition: 0.2s;
         }
 
-        .info-value {
-            color: #1f2937;
-            font-weight: bold;
-            word-break: break-word;
+        .view-button:hover {
+            background: #1f4e79;
+            color: white;
         }
 
         /* =========================
-           DESCRIPTION
+           DETAILS ROW
         ========================= */
 
-        .description {
+        .details-row {
+            display: none;
             background: #f8fafc;
-            border-radius: 9px;
-            padding: 18px;
-            margin-bottom: 25px;
         }
 
-        .description h4 {
+        .details-row.show {
+            display: table-row;
+        }
+
+        .details-cell {
+            padding: 0 !important;
+        }
+
+        .details {
+            padding: 22px;
+
+            border-top: 1px solid #e5e7eb;
+        }
+
+        .details-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .details-box {
+            background: white;
+
+            border: 1px solid #e5e7eb;
+            border-radius: 7px;
+
+            padding: 17px;
+        }
+
+        .details-box h3 {
+            color: #1f4e79;
+
+            font-size: 15px;
+
+            margin-bottom: 12px;
+        }
+
+        .detail-line {
+            margin-bottom: 10px;
+            font-size: 13px;
+        }
+
+        .detail-line:last-child {
+            margin-bottom: 0;
+        }
+
+        .detail-label {
+            display: block;
+
+            color: #6b7280;
+
+            font-size: 11px;
+            text-transform: uppercase;
+            font-weight: 700;
+
+            margin-bottom: 4px;
+        }
+
+        .detail-value {
             color: #374151;
-            margin-bottom: 8px;
+            line-height: 1.5;
         }
 
-        .description p {
-            color: #4b5563;
+        .description-text {
+            background: #f8fafc;
+
+            border: 1px solid #e5e7eb;
+
+            border-radius: 6px;
+
+            padding: 12px;
+
             line-height: 1.6;
         }
 
         /* =========================
-           UPDATE AREA
+           UPDATE FORM
         ========================= */
 
-        .update-area {
-            background: #f8fafc;
-            border-radius: 10px;
-            padding: 22px;
+        .update-form {
+            margin-top: 20px;
+
+            background: white;
+
+            border: 1px solid #e5e7eb;
+            border-radius: 7px;
+
+            padding: 18px;
         }
 
-        .update-area h3 {
-            color: #1f4e79;
-            margin-bottom: 18px;
-            font-size: 18px;
+        .update-form h3 {
+            font-size: 15px;
+            color: #1f2937;
+
+            margin-bottom: 15px;
         }
 
-        .form-group {
-            margin-bottom: 18px;
+        .form-grid {
+            display: grid;
+
+            grid-template-columns: 220px 1fr;
+
+            gap: 15px;
+
+            align-items: start;
         }
 
         .form-group label {
             display: block;
-            font-weight: bold;
-            margin-bottom: 8px;
+
+            font-size: 12px;
+            font-weight: 700;
+
             color: #374151;
+
+            margin-bottom: 7px;
         }
 
         select,
         textarea {
             width: 100%;
-            padding: 13px 14px;
 
             border: 1px solid #d1d5db;
-            border-radius: 8px;
+            border-radius: 6px;
+
+            padding: 10px 11px;
+
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 14px;
 
             background: white;
-            font-size: 15px;
-            font-family: Arial, sans-serif;
+            color: #374151;
+        }
+
+        select {
+            height: 40px;
+        }
+
+        textarea {
+            min-height: 85px;
+            resize: vertical;
         }
 
         select:focus,
         textarea:focus {
             outline: none;
-            border-color: #1f4e79;
-            box-shadow: 0 0 0 3px rgba(31,78,121,0.12);
-        }
 
-        textarea {
-            min-height: 110px;
-            resize: vertical;
+            border-color: #1f4e79;
+
+            box-shadow: 0 0 0 2px rgba(31, 78, 121, 0.08);
         }
 
         .update-button {
-            width: 100%;
-            padding: 14px;
+            margin-top: 15px;
 
             background: #1f4e79;
             color: white;
 
             border: none;
-            border-radius: 8px;
+            border-radius: 6px;
 
-            font-size: 16px;
-            font-weight: bold;
+            padding: 10px 18px;
+
+            font-size: 13px;
+            font-weight: 700;
 
             cursor: pointer;
+
             transition: 0.2s;
         }
 
         .update-button:hover {
             background: #163b5c;
-            transform: translateY(-1px);
         }
 
-        /* =========================
-           SUBMITTED DATE
-        ========================= */
-
         .submitted {
-            margin-top: 18px;
-            color: #6b7280;
-            font-size: 13px;
-            text-align: right;
+            color: #9ca3af;
+            font-size: 11px;
+            margin-top: 12px;
         }
 
         /* =========================
@@ -401,24 +651,45 @@
 
         .empty {
             background: white;
+
+            border: 1px solid #e5e7eb;
+            border-radius: 9px;
+
             padding: 60px 20px;
+
             text-align: center;
-            border-radius: 14px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.06);
         }
 
         .empty-icon {
-            font-size: 45px;
-            margin-bottom: 15px;
+            font-size: 35px;
+            margin-bottom: 12px;
         }
 
         .empty h3 {
-            color: #1f2937;
-            margin-bottom: 8px;
+            font-size: 18px;
+            color: #374151;
+            margin-bottom: 6px;
         }
 
         .empty p {
             color: #6b7280;
+            font-size: 14px;
+        }
+
+        /* =========================
+           NO SEARCH RESULTS
+        ========================= */
+
+        .no-results {
+            display: none;
+
+            text-align: center;
+
+            padding: 30px;
+
+            color: #6b7280;
+
+            font-size: 14px;
         }
 
         /* =========================
@@ -431,506 +702,955 @@
                 grid-template-columns: repeat(2, 1fr);
             }
 
-            .complaint-info {
-                grid-template-columns: 1fr 1fr;
+            .toolbar {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            .filters {
+                width: 100%;
+            }
+
+            .search-box {
+                flex: 1;
+            }
+
+            .details-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
             }
         }
 
-        @media (max-width: 650px) {
+        @media (max-width: 600px) {
 
             nav {
                 height: auto;
-                padding: 18px 5%;
-                flex-direction: column;
-                gap: 15px;
+                padding: 15px 5%;
+
+                gap: 12px;
             }
 
-            .dashboard {
-                width: 92%;
+            .logo {
+                font-size: 16px;
+            }
+
+            .admin-name {
+                display: none;
+            }
+
+            .container {
+                width: 94%;
                 margin-top: 25px;
             }
 
-            .dashboard-header {
-                flex-direction: column;
+            .page-header {
                 align-items: flex-start;
-                gap: 15px;
+
+                flex-direction: column;
+
+                gap: 12px;
+            }
+
+            .page-header h1 {
+                font-size: 25px;
             }
 
             .stats {
                 grid-template-columns: 1fr;
             }
 
-            .complaint-info {
-                grid-template-columns: 1fr;
-            }
-
-            .complaint-top {
+            .filters {
                 flex-direction: column;
-                gap: 15px;
             }
 
-            .complaint-card {
-                padding: 20px;
+            .search-box,
+            .filter-select {
+                width: 100%;
+            }
+
+            .details {
+                padding: 14px;
             }
         }
-
     </style>
 </head>
 
 
 <body>
 
+    <!-- =========================
+         NAVBAR
+    ========================= -->
 
-<!-- =========================
-     NAVBAR
-========================= -->
+    <nav>
 
-<nav>
-
-    <div class="logo">
-        College Complaint System - Admin
-    </div>
-
-    <div class="nav-links">
-
-        <a href="{{ url_for('admin_dashboard') }}">
-            Dashboard
-        </a>
-
-        <a
-            href="{{ url_for('admin_logout') }}"
-            class="logout"
-        >
-            Logout
-        </a>
-
-    </div>
-
-</nav>
-
-
-
-<!-- =========================
-     DASHBOARD
-========================= -->
-
-<div class="dashboard">
-
-
-    <div class="dashboard-header">
-
-        <div>
-            <h1>Admin Dashboard</h1>
-
-            <p>
-                Manage and respond to student complaints.
-            </p>
+        <div class="logo">
+            College Complaint System
         </div>
 
-        <div class="admin-badge">
-            Administrator Panel
+        <div class="nav-right">
+
+            <span class="admin-name">
+                Administrator
+            </span>
+
+            <a
+                href="{{ url_for('admin_logout') }}"
+                class="logout"
+            >
+                Logout
+            </a>
+
         </div>
 
-    </div>
-
-
-
-    <!-- FLASH MESSAGES -->
-
-    {% with messages = get_flashed_messages() %}
-
-        {% if messages %}
-
-            {% for message in messages %}
-
-                <div class="message">
-                    ✓ {{ message }}
-                </div>
-
-            {% endfor %}
-
-        {% endif %}
-
-    {% endwith %}
-
+    </nav>
 
 
     <!-- =========================
-         STATISTICS
+         MAIN CONTAINER
     ========================= -->
 
-    <div class="stats">
+    <div class="container">
 
-        <div class="stat-card">
 
-            <h3>
-                TOTAL COMPLAINTS
-            </h3>
+        <!-- PAGE HEADER -->
 
-            <div class="stat-number">
-                {{ complaints|length }}
-            </div>
+        <div class="page-header">
 
-        </div>
+            <div>
 
-
-        <div class="stat-card">
-
-            <h3>
-                PENDING
-            </h3>
-
-            <div class="stat-number">
-
-                {{ complaints
-                    |selectattr("status", "equalto", "Pending")
-                    |list
-                    |length
-                }}
-
-            </div>
-
-        </div>
-
-
-        <div class="stat-card">
-
-            <h3>
-                IN PROGRESS
-            </h3>
-
-            <div class="stat-number">
-
-                {{ complaints
-                    |selectattr("status", "equalto", "In Progress")
-                    |list
-                    |length
-                }}
-
-            </div>
-
-        </div>
-
-
-        <div class="stat-card">
-
-            <h3>
-                RESOLVED
-            </h3>
-
-            <div class="stat-number">
-
-                {{ complaints
-                    |selectattr("status", "equalto", "Resolved")
-                    |list
-                    |length
-                }}
-
-            </div>
-
-        </div>
-
-    </div>
-
-
-
-    <!-- =========================
-         COMPLAINTS
-    ========================= -->
-
-    <div class="section-header">
-
-        <h2>
-            All Complaints
-        </h2>
-
-        <span class="complaint-count">
-            {{ complaints|length }} complaint(s)
-        </span>
-
-    </div>
-
-
-
-    {% if complaints %}
-
-
-        {% for complaint in complaints %}
-
-
-        <div class="complaint-card">
-
-
-            <!-- COMPLAINT HEADER -->
-
-            <div class="complaint-top">
-
-                <div>
-
-                    <div class="complaint-id">
-                        Complaint #{{ complaint.id }}
-                    </div>
-
-                    <div class="complaint-title">
-                        {{ complaint.subject }}
-                    </div>
-
-                </div>
-
-
-                <div class="badges">
-
-                    {% if complaint.status == "Pending" %}
-
-                        <span class="badge status-pending">
-                            Pending
-                        </span>
-
-                    {% elif complaint.status == "In Progress" %}
-
-                        <span class="badge status-progress">
-                            In Progress
-                        </span>
-
-                    {% elif complaint.status == "Resolved" %}
-
-                        <span class="badge status-resolved">
-                            Resolved
-                        </span>
-
-                    {% elif complaint.status == "Rejected" %}
-
-                        <span class="badge status-rejected">
-                            Rejected
-                        </span>
-
-                    {% endif %}
-
-
-                    {% if complaint.priority == "High" %}
-
-                        <span class="badge priority-high">
-                            High Priority
-                        </span>
-
-                    {% elif complaint.priority == "Medium" %}
-
-                        <span class="badge priority-medium">
-                            Medium Priority
-                        </span>
-
-                    {% elif complaint.priority == "Low" %}
-
-                        <span class="badge priority-low">
-                            Low Priority
-                        </span>
-
-                    {% endif %}
-
-                </div>
-
-            </div>
-
-
-
-            <!-- STUDENT INFORMATION -->
-
-            <div class="complaint-info">
-
-
-                <div class="info-box">
-
-                    <div class="info-label">
-                        Student
-                    </div>
-
-                    <div class="info-value">
-                        {{ complaint.user_name }}
-                    </div>
-
-                </div>
-
-
-                <div class="info-box">
-
-                    <div class="info-label">
-                        Email
-                    </div>
-
-                    <div class="info-value">
-                        {{ complaint.user_email }}
-                    </div>
-
-                </div>
-
-
-                <div class="info-box">
-
-                    <div class="info-label">
-                        Category
-                    </div>
-
-                    <div class="info-value">
-                        {{ complaint.category_name }}
-                    </div>
-
-                </div>
-
-
-            </div>
-
-
-
-            <!-- DESCRIPTION -->
-
-            <div class="description">
-
-                <h4>
-                    Complaint Description
-                </h4>
+                <h1>
+                    Admin Dashboard
+                </h1>
 
                 <p>
-                    {{ complaint.description }}
+                    Manage and respond to student complaints.
+                </p>
+
+            </div>
+
+            <div class="admin-label">
+                Administrator Panel
+            </div>
+
+        </div>
+
+
+        <!-- =========================
+             FLASH MESSAGES
+        ========================= -->
+
+        {% with messages = get_flashed_messages() %}
+
+            {% if messages %}
+
+                {% for message in messages %}
+
+                    <div class="message">
+                        ✓ {{ message }}
+                    </div>
+
+                {% endfor %}
+
+            {% endif %}
+
+        {% endwith %}
+
+
+        <!-- =========================
+             STATISTICS
+        ========================= -->
+
+        <div class="stats">
+
+            <!-- TOTAL -->
+
+            <div class="stat-card">
+
+                <div class="stat-info">
+
+                    <h3>
+                        Total Complaints
+                    </h3>
+
+                    <div class="stat-number">
+                        {{ complaints|length }}
+                    </div>
+
+                </div>
+
+                <div class="stat-icon total-icon">
+                    #
+                </div>
+
+            </div>
+
+
+            <!-- PENDING -->
+
+            <div class="stat-card">
+
+                <div class="stat-info">
+
+                    <h3>
+                        Pending
+                    </h3>
+
+                    <div class="stat-number">
+
+                        {{
+                            complaints
+                            |selectattr("status", "equalto", "Pending")
+                            |list
+                            |length
+                        }}
+
+                    </div>
+
+                </div>
+
+                <div class="stat-icon pending-icon">
+                    !
+                </div>
+
+            </div>
+
+
+            <!-- IN PROGRESS -->
+
+            <div class="stat-card">
+
+                <div class="stat-info">
+
+                    <h3>
+                        In Progress
+                    </h3>
+
+                    <div class="stat-number">
+
+                        {{
+                            complaints
+                            |selectattr("status", "equalto", "In Progress")
+                            |list
+                            |length
+                        }}
+
+                    </div>
+
+                </div>
+
+                <div class="stat-icon progress-icon">
+                    ↻
+                </div>
+
+            </div>
+
+
+            <!-- RESOLVED -->
+
+            <div class="stat-card">
+
+                <div class="stat-info">
+
+                    <h3>
+                        Resolved
+                    </h3>
+
+                    <div class="stat-number">
+
+                        {{
+                            complaints
+                            |selectattr("status", "equalto", "Resolved")
+                            |list
+                            |length
+                        }}
+
+                    </div>
+
+                </div>
+
+                <div class="stat-icon resolved-icon">
+                    ✓
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- =========================
+             COMPLAINT TOOLBAR
+        ========================= -->
+
+        <div class="toolbar">
+
+            <div class="section-title">
+
+                <h2>
+                    All Complaints
+                </h2>
+
+                <span>
+                    {{ complaints|length }} complaint(s)
+                </span>
+
+            </div>
+
+
+            <div class="filters">
+
+                <input
+                    type="text"
+                    id="searchInput"
+                    class="search-box"
+                    placeholder="Search complaints..."
+                    onkeyup="filterComplaints()"
+                >
+
+
+                <select
+                    id="statusFilter"
+                    class="filter-select"
+                    onchange="filterComplaints()"
+                >
+
+                    <option value="all">
+                        All Status
+                    </option>
+
+                    <option value="Pending">
+                        Pending
+                    </option>
+
+                    <option value="In Progress">
+                        In Progress
+                    </option>
+
+                    <option value="Resolved">
+                        Resolved
+                    </option>
+
+                    <option value="Rejected">
+                        Rejected
+                    </option>
+
+                </select>
+
+            </div>
+
+        </div>
+
+
+        <!-- =========================
+             COMPLAINT TABLE
+        ========================= -->
+
+        {% if complaints %}
+
+            <div class="table-container">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                Complaint
+                            </th>
+
+                            <th>
+                                Student
+                            </th>
+
+                            <th>
+                                Category
+                            </th>
+
+                            <th>
+                                Priority
+                            </th>
+
+                            <th>
+                                Status
+                            </th>
+
+                            <th>
+                                Action
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody id="complaintsTable">
+
+                        {% for complaint in complaints %}
+
+                            <!-- =========================
+                                 MAIN ROW
+                            ========================= -->
+
+                            <tr
+                                class="complaint-row"
+                                data-status="{{ complaint.status }}"
+                                data-search="{{ complaint.id }} {{ complaint.subject }} {{ complaint.user_name }} {{ complaint.user_email }} {{ complaint.category_name }} {{ complaint.description }}"
+                            >
+
+                                <td>
+
+                                    <div class="complaint-id">
+                                        #{{ complaint.id }}
+                                    </div>
+
+                                    <div class="subject">
+                                        {{ complaint.subject }}
+                                    </div>
+
+                                </td>
+
+
+                                <td>
+
+                                    <div class="student-name">
+                                        {{ complaint.user_name }}
+                                    </div>
+
+                                    <div class="student-email">
+                                        {{ complaint.user_email }}
+                                    </div>
+
+                                </td>
+
+
+                                <td>
+
+                                    <div class="category">
+                                        {{ complaint.category_name }}
+                                    </div>
+
+                                </td>
+
+
+                                <td>
+
+                                    {% if complaint.priority == "High" %}
+
+                                        <span class="badge priority-high">
+                                            High
+                                        </span>
+
+                                    {% elif complaint.priority == "Medium" %}
+
+                                        <span class="badge priority-medium">
+                                            Medium
+                                        </span>
+
+                                    {% elif complaint.priority == "Low" %}
+
+                                        <span class="badge priority-low">
+                                            Low
+                                        </span>
+
+                                    {% endif %}
+
+                                </td>
+
+
+                                <td>
+
+                                    {% if complaint.status == "Pending" %}
+
+                                        <span class="badge status-pending">
+                                            Pending
+                                        </span>
+
+                                    {% elif complaint.status == "In Progress" %}
+
+                                        <span class="badge status-progress">
+                                            In Progress
+                                        </span>
+
+                                    {% elif complaint.status == "Resolved" %}
+
+                                        <span class="badge status-resolved">
+                                            Resolved
+                                        </span>
+
+                                    {% elif complaint.status == "Rejected" %}
+
+                                        <span class="badge status-rejected">
+                                            Rejected
+                                        </span>
+
+                                    {% endif %}
+
+                                </td>
+
+
+                                <td>
+
+                                    <button
+                                        type="button"
+                                        class="view-button"
+                                        onclick="toggleDetails({{ complaint.id }}, this)"
+                                    >
+                                        View / Manage
+                                    </button>
+
+                                </td>
+
+                            </tr>
+
+
+                            <!-- =========================
+                                 DETAILS ROW
+                            ========================= -->
+
+                            <tr
+                                id="details-{{ complaint.id }}"
+                                class="details-row"
+                            >
+
+                                <td
+                                    colspan="6"
+                                    class="details-cell"
+                                >
+
+                                    <div class="details">
+
+
+                                        <!-- INFORMATION -->
+
+                                        <div class="details-grid">
+
+
+                                            <!-- STUDENT -->
+
+                                            <div class="details-box">
+
+                                                <h3>
+                                                    Student Information
+                                                </h3>
+
+
+                                                <div class="detail-line">
+
+                                                    <span class="detail-label">
+                                                        Student Name
+                                                    </span>
+
+                                                    <span class="detail-value">
+                                                        {{ complaint.user_name }}
+                                                    </span>
+
+                                                </div>
+
+
+                                                <div class="detail-line">
+
+                                                    <span class="detail-label">
+                                                        Email
+                                                    </span>
+
+                                                    <span class="detail-value">
+                                                        {{ complaint.user_email }}
+                                                    </span>
+
+                                                </div>
+
+
+                                                <div class="detail-line">
+
+                                                    <span class="detail-label">
+                                                        Category
+                                                    </span>
+
+                                                    <span class="detail-value">
+                                                        {{ complaint.category_name }}
+                                                    </span>
+
+                                                </div>
+
+
+                                                <div class="detail-line">
+
+                                                    <span class="detail-label">
+                                                        Submitted
+                                                    </span>
+
+                                                    <span class="detail-value">
+                                                        {{ complaint.created_at }}
+                                                    </span>
+
+                                                </div>
+
+                                            </div>
+
+
+                                            <!-- COMPLAINT -->
+
+                                            <div class="details-box">
+
+                                                <h3>
+                                                    Complaint Details
+                                                </h3>
+
+
+                                                <div class="detail-line">
+
+                                                    <span class="detail-label">
+                                                        Subject
+                                                    </span>
+
+                                                    <span class="detail-value">
+                                                        {{ complaint.subject }}
+                                                    </span>
+
+                                                </div>
+
+
+                                                <div class="detail-line">
+
+                                                    <span class="detail-label">
+                                                        Priority
+                                                    </span>
+
+                                                    <span class="detail-value">
+
+                                                        {% if complaint.priority == "High" %}
+
+                                                            <span class="badge priority-high">
+                                                                High Priority
+                                                            </span>
+
+                                                        {% elif complaint.priority == "Medium" %}
+
+                                                            <span class="badge priority-medium">
+                                                                Medium Priority
+                                                            </span>
+
+                                                        {% elif complaint.priority == "Low" %}
+
+                                                            <span class="badge priority-low">
+                                                                Low Priority
+                                                            </span>
+
+                                                        {% endif %}
+
+                                                    </span>
+
+                                                </div>
+
+
+                                                <div class="detail-line">
+
+                                                    <span class="detail-label">
+                                                        Description
+                                                    </span>
+
+                                                    <div class="description-text">
+                                                        {{ complaint.description }}
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
+
+                                        <!-- =========================
+                                             UPDATE FORM
+                                        ========================= -->
+
+                                        <div class="update-form">
+
+                                            <h3>
+                                                Manage Complaint
+                                            </h3>
+
+
+                                            <form
+                                                method="POST"
+                                                action="{{ url_for('update_complaint', complaint_id=complaint.id) }}"
+                                            >
+
+
+                                                <div class="form-grid">
+
+
+                                                    <!-- STATUS -->
+
+                                                    <div class="form-group">
+
+                                                        <label>
+                                                            Update Status
+                                                        </label>
+
+                                                        <select
+                                                            name="status"
+                                                            required
+                                                        >
+
+                                                            <option
+                                                                value="Pending"
+                                                                {% if complaint.status == "Pending" %}
+                                                                    selected
+                                                                {% endif %}
+                                                            >
+                                                                Pending
+                                                            </option>
+
+
+                                                            <option
+                                                                value="In Progress"
+                                                                {% if complaint.status == "In Progress" %}
+                                                                    selected
+                                                                {% endif %}
+                                                            >
+                                                                In Progress
+                                                            </option>
+
+
+                                                            <option
+                                                                value="Resolved"
+                                                                {% if complaint.status == "Resolved" %}
+                                                                    selected
+                                                                {% endif %}
+                                                            >
+                                                                Resolved
+                                                            </option>
+
+
+                                                            <option
+                                                                value="Rejected"
+                                                                {% if complaint.status == "Rejected" %}
+                                                                    selected
+                                                                {% endif %}
+                                                            >
+                                                                Rejected
+                                                            </option>
+
+                                                        </select>
+
+                                                    </div>
+
+
+                                                    <!-- ADMIN REPLY -->
+
+                                                    <div class="form-group">
+
+                                                        <label>
+                                                            Admin Reply
+                                                        </label>
+
+                                                        <textarea
+                                                            name="admin_reply"
+                                                            placeholder="Write a response to the student..."
+                                                        >{{ complaint.admin_reply or "" }}</textarea>
+
+                                                    </div>
+
+                                                </div>
+
+
+                                                <button
+                                                    type="submit"
+                                                    class="update-button"
+                                                >
+                                                    Update Complaint
+                                                </button>
+
+
+                                            </form>
+
+                                        </div>
+
+                                    </div>
+
+                                </td>
+
+                            </tr>
+
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+
+                <div
+                    id="noResults"
+                    class="no-results"
+                >
+                    No complaints match your search.
+                </div>
+
+            </div>
+
+
+        {% else %}
+
+
+            <!-- =========================
+                 EMPTY STATE
+            ========================= -->
+
+            <div class="empty">
+
+                <div class="empty-icon">
+                    📋
+                </div>
+
+                <h3>
+                    No Complaints Found
+                </h3>
+
+                <p>
+                    There are currently no student complaints.
                 </p>
 
             </div>
 
 
-
-            <!-- UPDATE FORM -->
-
-            <div class="update-area">
-
-                <h3>
-                    Manage Complaint
-                </h3>
+        {% endif %}
 
 
-                <form
-                    method="POST"
-                    action="{{ url_for('update_complaint', complaint_id=complaint.id) }}"
-                >
+    </div>
 
 
-                    <div class="form-group">
+    <!-- =========================
+         JAVASCRIPT
+    ========================= -->
 
-                        <label>
-                            Update Status
-                        </label>
+    <script>
 
-                        <select name="status" required>
+        function toggleDetails(id, button) {
 
-                            <option
-                                value="Pending"
-                                {% if complaint.status == "Pending" %}
-                                    selected
-                                {% endif %}
-                            >
-                                Pending
-                            </option>
+            const row = document.getElementById("details-" + id);
 
-                            <option
-                                value="In Progress"
-                                {% if complaint.status == "In Progress" %}
-                                    selected
-                                {% endif %}
-                            >
-                                In Progress
-                            </option>
+            if (row.classList.contains("show")) {
 
-                            <option
-                                value="Resolved"
-                                {% if complaint.status == "Resolved" %}
-                                    selected
-                                {% endif %}
-                            >
-                                Resolved
-                            </option>
+                row.classList.remove("show");
 
-                            <option
-                                value="Rejected"
-                                {% if complaint.status == "Rejected" %}
-                                    selected
-                                {% endif %}
-                            >
-                                Rejected
-                            </option>
+                button.textContent = "View / Manage";
 
-                        </select>
+            } else {
 
-                    </div>
+                row.classList.add("show");
+
+                button.textContent = "Close";
+
+            }
+
+        }
 
 
+        function filterComplaints() {
 
-                    <div class="form-group">
-
-                        <label>
-                            Admin Reply
-                        </label>
-
-                        <textarea
-                            name="admin_reply"
-                            placeholder="Write a response to the student..."
-                        >{{ complaint.admin_reply or "" }}</textarea>
-
-                    </div>
+            const searchInput =
+                document.getElementById("searchInput")
+                .value
+                .toLowerCase()
+                .trim();
 
 
-
-                    <button
-                        type="submit"
-                        class="update-button"
-                    >
-                        Update Complaint
-                    </button>
+            const statusFilter =
+                document.getElementById("statusFilter")
+                .value;
 
 
-                </form>
-
-            </div>
-
+            const rows =
+                document.querySelectorAll(".complaint-row");
 
 
-            <!-- DATE -->
-
-            <div class="submitted">
-
-                Submitted:
-                {{ complaint.created_at }}
-
-            </div>
+            let visibleCount = 0;
 
 
-        </div>
+            rows.forEach(function(row) {
+
+                const searchText =
+                    row.getAttribute("data-search")
+                    .toLowerCase();
 
 
-        {% endfor %}
+                const rowStatus =
+                    row.getAttribute("data-status");
 
 
-    {% else %}
+                const matchesSearch =
+                    searchText.includes(searchInput);
 
 
-        <div class="empty">
-
-            <div class="empty-icon">
-                📋
-            </div>
-
-            <h3>
-                No Complaints Found
-            </h3>
-
-            <p>
-                There are currently no student complaints.
-            </p>
-
-        </div>
+                const matchesStatus =
+                    statusFilter === "all"
+                    || rowStatus === statusFilter;
 
 
-    {% endif %}
+                if (matchesSearch && matchesStatus) {
+
+                    row.style.display = "";
+
+                    visibleCount++;
+
+                } else {
+
+                    row.style.display = "none";
 
 
-</div>
+                    const id =
+                        row.querySelector(".view-button")
+                        ?.getAttribute("onclick");
+
+
+                    if (id) {
+
+                        const match =
+                            id.match(/toggleDetails\((\d+)/);
+
+                        if (match) {
+
+                            const detailRow =
+                                document.getElementById(
+                                    "details-" + match[1]
+                                );
+
+                            if (detailRow) {
+                                detailRow.classList.remove("show");
+                            }
+
+                        }
+
+                    }
+
+                }
+
+            });
+
+
+            const noResults =
+                document.getElementById("noResults");
+
+
+            if (noResults) {
+
+                if (visibleCount === 0) {
+                    noResults.style.display = "block";
+                } else {
+                    noResults.style.display = "none";
+                }
+
+            }
+
+        }
+
+    </script>
 
 </body>
+
 </html>

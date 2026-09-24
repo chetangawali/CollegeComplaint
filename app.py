@@ -1,7 +1,12 @@
 import os
 from flask import Flask, render_template, request, redirect, url_for, session, flash
 from database import get_connection
-from dotenv import load_dotenv
+
+try:
+    from dotenv import load_dotenv
+except ModuleNotFoundError:
+    def load_dotenv():
+        return False
 
 load_dotenv()
 
